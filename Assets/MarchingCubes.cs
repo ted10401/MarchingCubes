@@ -420,21 +420,271 @@ public class MarchingCubes
             case 130: //10000010
                 AddTriagnles(8, 13, 9, 15, 18, 19);
                 break;
+
+            case 131: //10000011
+                break;
+
             case 132: //10000100
                 AddTriagnles(9, 14, 10, 15, 18, 19);
                 break;
+
+            case 133: //10000101
+                break;
+            case 134: //10000110
+                break;
+            case 135: //10000111
+                break;
+
             case 136: //10001000
                 AddTriagnles(19, 11, 10, 19, 10, 18);
                 break;
+
+            case 137: //10001001
+                break;
+            case 138: //10001010
+                break;
+            case 139: //10001011
+                break;
+            case 140: //10001100
+                break;
+            case 141: //10001101
+                break;
+            case 142: //10001110
+                break;
+            case 143: //10001111
+                break;
+
             case 144: //10010000
                 AddTriagnles(18, 16, 12, 18, 12, 15);
                 break;
+
+            case 145: //10010001
+                break;
+            case 146: //10010010
+                break;
+            case 147: //10010011
+                break;
+            case 148: //10010100
+                break;
+            case 149: //10010101
+                break;
+            case 150: //10010110
+                break;
+            case 151: //10010111
+                break;
+            case 152: //10011000
+                break;
+            case 153: //10011001
+                break;
+            case 154: //10011010
+                break;
+            case 155: //10011011
+                break;
+            case 156: //10011100
+                break;
+            case 157: //10011101
+                break;
+            case 158: //10011110
+                break;
+            case 159: //10011111
+                break;
+
             case 160: //10100000
                 AddTriagnles(13, 16, 17, 15, 18, 19);
                 break;
+
+            case 161: //10100001
+                break;
+            case 162: //10100010
+                break;
+            case 163: //10100011
+                break;
+            case 164: //10100100
+                break;
+            case 165: //10100101
+                break;
+            case 166: //10100110
+                break;
+            case 167: //10100111
+                break;
+            case 168: //10101000
+                break;
+            case 169: //10101001
+                break;
+            case 170: //10101010
+                break;
+            case 171: //10101011
+                break;
+            case 172: //10101100
+                break;
+            case 173: //10101101
+                break;
+            case 174: //10101110
+                break;
+            case 175: //10101111
+                break;
+            case 176: //10110000
+                break;
+            case 177: //10110001
+                break;
+            case 178: //10110010
+                break;
+            case 179: //10110011
+                break;
+            case 180: //10110100
+                break;
+            case 181: //10110101
+                break;
+            case 182: //10110110
+                break;
+            case 183: //10110111
+                break;
+            case 184: //10111000
+                break;
+            case 185: //10111001
+                break;
+            case 186: //10111010
+                break;
+            case 187: //10111011
+                break;
+            case 188: //10111100
+                break;
+            case 189: //10111101
+                break;
+            case 190: //10111110
+                break;
+            case 191: //10111111
+                break;
+
             case 192: //11000000
                 AddTriagnles(17, 19, 15, 17, 15, 14);
                 break;
+
+            case 193: //11000001
+                break;
+            case 194: //11000010
+                break;
+            case 195: //11000011
+                break;
+            case 196: //11000100
+                break;
+            case 197: //11000101
+                break;
+            case 198: //11000110
+                break;
+            case 199: //11000111
+                break;
+            case 200: //11001000
+                break;
+            case 201: //11001001
+                break;
+            case 202: //11001010
+                break;
+            case 203: //11001011
+                break;
+            case 204: //11001100
+                break;
+            case 205: //11001101
+                break;
+            case 206: //11001110
+                break;
+            case 207: //11001111
+                break;
+            case 208: //11010000
+                break;
+            case 209: //11010001
+                break;
+            case 210: //11010010
+                break;
+            case 211: //11010011
+                break;
+            case 212: //11010100
+                break;
+            case 213: //11010101
+                break;
+            case 214: //11010110
+                break;
+            case 215: //11010111
+                break;
+            case 216: //11011000
+                break;
+            case 217: //11011001
+                break;
+            case 218: //11011010
+                break;
+            case 219: //11011011
+                break;
+            case 220: //11011100
+                break;
+            case 221: //11011101
+                break;
+            case 222: //11011110
+                break;
+            case 223: //11011111
+                break;
+            case 224: //11100000
+                break;
+            case 225: //11100001
+                break;
+            case 226: //11100010
+                break;
+            case 227: //11100011
+                break;
+            case 228: //11100100
+                break;
+            case 229: //11100101
+                break;
+            case 230: //11100110
+                break;
+            case 231: //11100111
+                break;
+            case 232: //11101000
+                break;
+            case 233: //11101001
+                break;
+            case 234: //11101010
+                break;
+            case 235: //11101011
+                break;
+            case 236: //11101100
+                break;
+            case 237: //11101101
+                break;
+            case 238: //11101110
+                break;
+            case 239: //11101111
+                break;
+            case 240: //11110000
+                break;
+            case 241: //11110001
+                break;
+            case 242: //11110010
+                break;
+            case 243: //11110011
+                break;
+            case 244: //11110100
+                break;
+            case 245: //11110101
+                break;
+            case 246: //11110110
+                break;
+            case 247: //11110111
+                break;
+            case 248: //11111000
+                break;
+            case 249: //11111001
+                break;
+            case 250: //11111010
+                break;
+            case 251: //11111011
+                break;
+            case 252: //11111100
+                break;
+            case 253: //11111101
+                break;
+            case 254: //11111110
+                break;
+
             case 255: //11111111
                 break;
         }
