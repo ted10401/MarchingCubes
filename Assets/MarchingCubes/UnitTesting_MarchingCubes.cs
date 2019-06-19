@@ -75,14 +75,22 @@ public class UnitTesting_MarchingCubes : MonoBehaviour
         {
             if (m_marchingCubes.edgePositions[i].y > 0)
             {
-                UnityEditor.Handles.Label(m_marchingCubes.edgePositions[i] + Vector3.up * 0.2f, (i + 8).ToString());
+                UnityEditor.Handles.Label(m_marchingCubes.edgePositions[i] + Vector3.up * 0.2f, i.ToString());
             }
             else
             {
-                UnityEditor.Handles.Label(m_marchingCubes.edgePositions[i] + Vector3.up * -0.1f, (i + 8).ToString());
+                UnityEditor.Handles.Label(m_marchingCubes.edgePositions[i] + Vector3.up * -0.1f, i.ToString());
             }
 
             Gizmos.DrawSphere(m_marchingCubes.edgePositions[i], 0.05f);
+        }
+
+        Gizmos.color = Color.black;
+        for (int i = 0; i < m_marchingCubes.triangles.Count; i += 3)
+        {
+            Gizmos.DrawLine(m_marchingCubes.vertices[m_marchingCubes.triangles[i]], m_marchingCubes.vertices[m_marchingCubes.triangles[i + 1]]);
+            Gizmos.DrawLine(m_marchingCubes.vertices[m_marchingCubes.triangles[i + 1]], m_marchingCubes.vertices[m_marchingCubes.triangles[i + 2]]);
+            Gizmos.DrawLine(m_marchingCubes.vertices[m_marchingCubes.triangles[i]], m_marchingCubes.vertices[m_marchingCubes.triangles[i + 2]]);
         }
     }
 }
