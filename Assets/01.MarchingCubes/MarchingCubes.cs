@@ -270,8 +270,10 @@ public class MarchingCubes
 
     public Vector3[] nodePositions = new Vector3[8];
     public Vector3[] edgePositions = new Vector3[12];
-    public Vector3[] vertices = new Vector3[12];
-    public List<int> triangles = new List<int>();
+    private Vector3[] m_vertices = new Vector3[12];
+    private List<int> m_triangles = new List<int>();
+    public List<Vector3> validVertices = new List<Vector3>();
+    public List<int> validTriangles = new List<int>();
 
     public MarchingCubes()
     {
@@ -324,7 +326,7 @@ public class MarchingCubes
 
         for (int i = 0; i < edgePositions.Length; i++)
         {
-            vertices[i] = edgePositions[i];
+            m_vertices[i] = edgePositions[i];
         }
     }
 
@@ -348,8 +350,12 @@ public class MarchingCubes
 
     private void GenerateTriangles()
     {
-        triangles.Clear();
+        m_triangles.Clear();
+        validVertices.Clear();
+        validTriangles.Clear();
+
         AddTriagnles(m_marchingTable[configuration]);
+        UpdateValidMesh();
     }
 
     private void AddTriagnles(params int[] indexes)
@@ -361,7 +367,32 @@ public class MarchingCubes
                 break;
             }
 
-            triangles.Add(indexes[i]);
+            m_triangles.Add(indexes[i]);
+        }
+    }
+
+    private void UpdateValidMesh()
+    {
+        validVertices.Clear();
+        validTriangles.Clear();
+
+        Dictionary<int, int> trianglePairs = new Dictionary<int, int>();
+
+        int validTriangle = -1;
+
+        for(int i = 0; i < m_triangles.Count; i++)
+        {
+            if(!trianglePairs.ContainsKey(m_triangles[i]))
+            {
+                validTriangle++;
+                trianglePairs.Add(m_triangles[i], validTriangle);
+                validTriangles.Add(validTriangle);
+                validVertices.Add(m_vertices[m_triangles[i]]);
+            }
+            else
+            {
+                validTriangles.Add(trianglePairs[m_triangles[i]]);
+            }
         }
     }
 }

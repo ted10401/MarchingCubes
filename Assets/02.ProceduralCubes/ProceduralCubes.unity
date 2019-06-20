@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 1132100673}
-  mapSize: {x: 10, y: 10, z: 10}
+  mapSize: {x: 20, y: 20, z: 20}
   cullingThreshold: 1
   cubeSize: 1
 --- !u!4 &63968479

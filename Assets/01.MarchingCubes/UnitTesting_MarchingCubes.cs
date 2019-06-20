@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UnitTesting_MarchingCubes : MonoBehaviour
 {
@@ -20,8 +18,8 @@ public class UnitTesting_MarchingCubes : MonoBehaviour
         Debug.LogError(m_marchingCubes.configuration);
 
         Mesh mesh = new Mesh();
-        mesh.vertices = m_marchingCubes.vertices;
-        mesh.triangles = m_marchingCubes.triangles.ToArray();
+        mesh.vertices = m_marchingCubes.validVertices.ToArray();
+        mesh.triangles = m_marchingCubes.validTriangles.ToArray();
         mesh.RecalculateNormals();
 
         meshFilter.mesh = mesh;
@@ -86,11 +84,11 @@ public class UnitTesting_MarchingCubes : MonoBehaviour
         }
 
         Gizmos.color = Color.black;
-        for (int i = 0; i < m_marchingCubes.triangles.Count; i += 3)
+        for (int i = 0; i < m_marchingCubes.validTriangles.Count; i += 3)
         {
-            Gizmos.DrawLine(m_marchingCubes.vertices[m_marchingCubes.triangles[i]], m_marchingCubes.vertices[m_marchingCubes.triangles[i + 1]]);
-            Gizmos.DrawLine(m_marchingCubes.vertices[m_marchingCubes.triangles[i + 1]], m_marchingCubes.vertices[m_marchingCubes.triangles[i + 2]]);
-            Gizmos.DrawLine(m_marchingCubes.vertices[m_marchingCubes.triangles[i]], m_marchingCubes.vertices[m_marchingCubes.triangles[i + 2]]);
+            Gizmos.DrawLine(m_marchingCubes.validVertices[m_marchingCubes.validTriangles[i]], m_marchingCubes.validVertices[m_marchingCubes.validTriangles[i + 1]]);
+            Gizmos.DrawLine(m_marchingCubes.validVertices[m_marchingCubes.validTriangles[i + 1]], m_marchingCubes.validVertices[m_marchingCubes.validTriangles[i + 2]]);
+            Gizmos.DrawLine(m_marchingCubes.validVertices[m_marchingCubes.validTriangles[i]], m_marchingCubes.validVertices[m_marchingCubes.validTriangles[i + 2]]);
         }
     }
 }

@@ -146,11 +146,11 @@ public class ProceduralCubes : MonoBehaviour
                     m_marchingCubes.SetNodes(new bool[] { m_finalMaps[x, y, z] == 1, m_finalMaps[x, y, z + 1] == 1, m_finalMaps[x + 1, y, z + 1] == 1, m_finalMaps[x + 1, y, z] == 1,
                     m_finalMaps[x, y + 1, z] == 1, m_finalMaps[x, y + 1, z + 1] == 1, m_finalMaps[x + 1, y + 1, z + 1] == 1, m_finalMaps[x + 1, y + 1, z] == 1 });
 
-                    foreach (int triangle in m_marchingCubes.triangles)
+                    foreach (int triangle in m_marchingCubes.validTriangles)
                     {
                         m_triangles.Add(triangle + m_vertices.Count);
                     }
-                    m_vertices.AddRange(m_marchingCubes.vertices);
+                    m_vertices.AddRange(m_marchingCubes.validVertices);
                 }
             }
         }
