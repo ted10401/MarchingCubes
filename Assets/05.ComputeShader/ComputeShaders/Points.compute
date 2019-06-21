@@ -1,0 +1,24 @@
+﻿#pragma kernel Density
+static const int numThreads = 8;
+
+RWStructuredBuffer<float4> points;
+int numPointsPerAxis;
+
+int indexFromCoord(uint x, uint y, uint z) {
+    return z * numPointsPerAxis * numPointsPerAxis + y * numPointsPerAxis + x;
+}
+
+[numthreads(numThreads,numThreads,numThreads)]
+void Density (int3 id : SV_DispatchThreadID)
+{
+    if (id.x >= numPointsPerAxis || id.y >= numPointsPerAxis || id.z >= numPointsPerAxis) {
+        return;
+    }
+
+    float3 pos = id;
+    float finalVal = -pos.y;
+
+    int index = indexFromCoord(id.x,id.y,id.z);
+    points[index] = float4(pos, finalVal);
+    
+}
