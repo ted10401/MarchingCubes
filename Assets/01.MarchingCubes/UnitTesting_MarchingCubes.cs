@@ -2,8 +2,8 @@
 
 public class UnitTesting_MarchingCubes : MonoBehaviour
 {
-    public Vector3 center = Vector3.zero;
     public float cubeSize = 1f;
+    [Range(0f, 1f)] public float lerp = 0.5f;
     public bool[] nodes = new bool[8];
     public MeshFilter meshFilter;
 
@@ -11,11 +11,10 @@ public class UnitTesting_MarchingCubes : MonoBehaviour
 
     private void OnValidate()
     {
-        m_marchingCubes.SetCenter(center);
+        m_marchingCubes.SetLerp(lerp);
+        m_marchingCubes.SetCenter(transform.position);
         m_marchingCubes.SetCubeSize(cubeSize);
         m_marchingCubes.SetNodes(nodes);
-
-        Debug.LogError(m_marchingCubes.configuration);
 
         Mesh mesh = new Mesh();
         mesh.vertices = m_marchingCubes.validVertices.ToArray();
@@ -32,6 +31,7 @@ public class UnitTesting_MarchingCubes : MonoBehaviour
             return;
         }
 
+        Gizmos.color = Color.black;
         Gizmos.DrawLine(m_marchingCubes.nodePositions[0], m_marchingCubes.nodePositions[1]);
         Gizmos.DrawLine(m_marchingCubes.nodePositions[1], m_marchingCubes.nodePositions[2]);
         Gizmos.DrawLine(m_marchingCubes.nodePositions[2], m_marchingCubes.nodePositions[3]);
@@ -45,41 +45,30 @@ public class UnitTesting_MarchingCubes : MonoBehaviour
         Gizmos.DrawLine(m_marchingCubes.nodePositions[2], m_marchingCubes.nodePositions[6]);
         Gizmos.DrawLine(m_marchingCubes.nodePositions[3], m_marchingCubes.nodePositions[7]);
 
+        Vector3 sceneViewUp = UnityEditor.SceneView.currentDrawingSceneView.camera.transform.up;
+        Vector3 sceneViewRight = UnityEditor.SceneView.currentDrawingSceneView.camera.transform.right;
+        Vector3 sceneViewUpRight = (sceneViewUp + sceneViewRight).normalized;
+
         for (int i = 0; i < m_marchingCubes.nodePositions.Length; i++)
         {
+            UnityEditor.Handles.Label(m_marchingCubes.nodePositions[i] + sceneViewUpRight * 0.15f, i.ToString());
+
             if(nodes[i])
-            {
-                Gizmos.color = Color.black;
-            }
-            else
             {
                 Gizmos.color = Color.white;
             }
-
-            if(m_marchingCubes.nodePositions[i].y > 0)
-            {
-                UnityEditor.Handles.Label(m_marchingCubes.nodePositions[i] + Vector3.up * 0.2f, i.ToString());
-            }
             else
             {
-                UnityEditor.Handles.Label(m_marchingCubes.nodePositions[i] + Vector3.up * -0.1f, i.ToString());
+                Gizmos.color = Color.red;
             }
 
             Gizmos.DrawSphere(m_marchingCubes.nodePositions[i], 0.1f);
         }
 
-        Gizmos.color = Color.grey;
+        Gizmos.color = Color.green;
         for (int i = 0; i < m_marchingCubes.edgePositions.Length; i++)
         {
-            if (m_marchingCubes.edgePositions[i].y > 0)
-            {
-                UnityEditor.Handles.Label(m_marchingCubes.edgePositions[i] + Vector3.up * 0.2f, i.ToString());
-            }
-            else
-            {
-                UnityEditor.Handles.Label(m_marchingCubes.edgePositions[i] + Vector3.up * -0.1f, i.ToString());
-            }
-
+            UnityEditor.Handles.Label(m_marchingCubes.edgePositions[i] + sceneViewUpRight * 0.075f, i.ToString());
             Gizmos.DrawSphere(m_marchingCubes.edgePositions[i], 0.05f);
         }
 

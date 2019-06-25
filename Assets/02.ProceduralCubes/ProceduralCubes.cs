@@ -5,6 +5,7 @@ public class ProceduralCubes : MonoBehaviour
 {
     public MeshFilter meshFilter;
     public Vector3Int mapSize = new Vector3Int(10, 10, 10);
+    [Range(0f, 1f)] public float lerp = 0.5f;
     [Range(0f, 1f)] public float cullingThreshold = 1f;
     public float cubeSize = 1f;
 
@@ -142,6 +143,7 @@ public class ProceduralCubes : MonoBehaviour
             {
                 for (int z = 0; z < mapSize.z - 1; z++)
                 {
+                    m_marchingCubes.SetLerp(lerp);
                     m_marchingCubes.SetCenter(new Vector3((float)-mapSize.x / 2 + x + cubeSize, (float)-mapSize.y / 2 + y + cubeSize, (float)-mapSize.z / 2 + z + cubeSize));
                     m_marchingCubes.SetNodes(new bool[] { m_finalMaps[x, y, z] == 1, m_finalMaps[x, y, z + 1] == 1, m_finalMaps[x + 1, y, z + 1] == 1, m_finalMaps[x + 1, y, z] == 1,
                     m_finalMaps[x, y + 1, z] == 1, m_finalMaps[x, y + 1, z + 1] == 1, m_finalMaps[x + 1, y + 1, z + 1] == 1, m_finalMaps[x + 1, y + 1, z] == 1 });
@@ -177,9 +179,14 @@ public class ProceduralCubes : MonoBehaviour
             {
                 for (int z = 0; z < mapSize.z; z++)
                 {
-                    Color color = Color.white * (1 - m_finalMaps[x, y, z]);
-                    color.a = 1;
-                    Gizmos.color = color;
+                    if(m_finalMaps[x, y, z] == 1)
+                    {
+                        Gizmos.color = Color.white;
+                    }
+                    else
+                    {
+                        Gizmos.color = Color.black;
+                    }
 
                     Gizmos.DrawSphere(new Vector3((float)-mapSize.x / 2 + x + cubeSize / 2, (float)-mapSize.y / 2 + y + cubeSize / 2, (float)-mapSize.z / 2 + z + cubeSize / 2), cubeSize * 0.1f);
                 }

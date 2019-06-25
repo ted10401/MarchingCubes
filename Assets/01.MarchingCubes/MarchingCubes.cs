@@ -263,10 +263,15 @@ public class MarchingCubes
         new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
     };
 
+    private int[] m_cornerIndexFromEdgeA = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3 };
+    private int[] m_cornerIndexFromEdgeB = new int[] { 1, 2, 3, 0, 5, 6, 7, 4, 4, 5, 6, 7 };
+
 
     public int configuration;
     public Vector3 center = Vector3.zero;
     public float cubeSize = 1f;
+    public float lerp = 0.5f;
+    public bool[] nodes;
 
     public Vector3[] nodePositions = new Vector3[8];
     public Vector3[] edgePositions = new Vector3[12];
@@ -300,6 +305,12 @@ public class MarchingCubes
         UpdateVertices();
     }
 
+    public void SetLerp(float lerp)
+    {
+        this.lerp = lerp;
+        UpdateVertices();
+    }
+
     private void UpdateVertices()
     {
         nodePositions[0] = center + new Vector3(-1, -1, -1) * (cubeSize * 0.5f);
@@ -310,6 +321,19 @@ public class MarchingCubes
         nodePositions[5] = center + new Vector3(-1, 1, 1) * (cubeSize * 0.5f);
         nodePositions[6] = center + new Vector3(1, 1, 1) * (cubeSize * 0.5f);
         nodePositions[7] = center + new Vector3(1, 1, -1) * (cubeSize * 0.5f);
+
+        //edgePositions[0] = Vector3.Lerp(nodePositions[0], nodePositions[1], lerp);
+        //edgePositions[1] = Vector3.Lerp(nodePositions[1], nodePositions[2], lerp);
+        //edgePositions[2] = Vector3.Lerp(nodePositions[2], nodePositions[3], lerp);
+        //edgePositions[3] = Vector3.Lerp(nodePositions[3], nodePositions[0], lerp);
+        //edgePositions[4] = Vector3.Lerp(nodePositions[4], nodePositions[5], lerp);
+        //edgePositions[5] = Vector3.Lerp(nodePositions[5], nodePositions[6], lerp);
+        //edgePositions[6] = Vector3.Lerp(nodePositions[6], nodePositions[7], lerp);
+        //edgePositions[7] = Vector3.Lerp(nodePositions[7], nodePositions[4], lerp);
+        //edgePositions[8] = Vector3.Lerp(nodePositions[0], nodePositions[4], lerp);
+        //edgePositions[9] = Vector3.Lerp(nodePositions[1], nodePositions[5], lerp);
+        //edgePositions[10] = Vector3.Lerp(nodePositions[2], nodePositions[6], lerp);
+        //edgePositions[11] = Vector3.Lerp(nodePositions[3], nodePositions[7], lerp);
 
         edgePositions[0] = center + new Vector3(-1, -1, 0) * (cubeSize * 0.5f);
         edgePositions[1] = center + new Vector3(0, -1, 1) * (cubeSize * 0.5f);
@@ -336,6 +360,8 @@ public class MarchingCubes
         {
             return;
         }
+
+        this.nodes = nodes;
 
         configuration = 0;
         int bit = 1;
@@ -387,12 +413,25 @@ public class MarchingCubes
                 validTriangle++;
                 trianglePairs.Add(m_triangles[i], validTriangle);
                 validTriangles.Add(validTriangle);
-                validVertices.Add(m_vertices[m_triangles[i]]);
+
+                int edgeA = m_cornerIndexFromEdgeA[m_triangles[i]];
+                int edgeB = m_cornerIndexFromEdgeB[m_triangles[i]];
+
+                validVertices.Add(GetInterpolateVerts(edgeA, edgeB));
             }
             else
             {
                 validTriangles.Add(trianglePairs[m_triangles[i]]);
             }
         }
+    }
+
+    private Vector3 GetInterpolateVerts(int indexA, int indexB)
+    {
+        float nodeA = nodes[indexA] ? 1 : 0;
+        float nodeB = nodes[indexB] ? 1 : 0;
+
+        float t = (lerp - nodeA) / (nodeB - nodeA);
+        return nodePositions[indexA] + t * (nodePositions[indexB] - nodePositions[indexA]);
     }
 }

@@ -150,7 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 1132100673}
-  mapSize: {x: 20, y: 20, z: 20}
+  mapSize: {x: 10, y: 10, z: 10}
+  lerp: 0.5
   cullingThreshold: 1
   cubeSize: 1
 --- !u!4 &63968479
@@ -352,6 +353,7 @@ GameObject:
   - component: {fileID: 1132100675}
   - component: {fileID: 1132100674}
   - component: {fileID: 1132100673}
+  - component: {fileID: 1132100676}
   m_Layer: 0
   m_Name: MarchingCubes
   m_TagString: Untagged
@@ -418,6 +420,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1132100676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132100672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8736896313f4b88956651e98e2cd7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 10
 --- !u!43 &1969409794
 Mesh:
   m_ObjectHideFlags: 0
